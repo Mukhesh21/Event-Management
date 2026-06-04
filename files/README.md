@@ -1,6 +1,6 @@
 # Smart Event Management System - Complete Setup Guide
 
-## 📋 Project Overview
+##Project Overview
 
 A professional event management system built with three technologies:
 - **C Language**: High-performance backend with smart scheduling algorithm
@@ -9,51 +9,7 @@ A professional event management system built with three technologies:
 
 ---
 
-## 🏗️ Architecture Overview
-
-```
-┌─────────────────────────────────────────────────────────────┐
-│                   index.html (Frontend)                      │
-│              Modern UI with Dark Theme                       │
-│         (HTML5, CSS3, Vanilla JavaScript)                   │
-└────────────────────┬────────────────────────────────────────┘
-                     │ JSON API Calls
-                     │ (AJAX/Fetch)
-                     ▼
-┌─────────────────────────────────────────────────────────────┐
-│                   app.py (Flask Server)                      │
-│      Routes, Request Handling, Data Validation              │
-│            (Python 3.x with Flask)                          │
-└────────────────────┬────────────────────────────────────────┘
-                     │ ctypes Library
-                     │ (C Interop)
-                     ▼
-┌─────────────────────────────────────────────────────────────┐
-│                   engine.dll (C Backend)                     │
-│    Event Management, Smart Scheduling Algorithm            │
-│         (Compiled C code - engine.c)                        │
-└─────────────────────────────────────────────────────────────┘
-```
-
----
-
-## 💻 System Requirements
-
-### Minimum Requirements
-- **OS**: Windows 7/10/11 (64-bit)
-- **RAM**: 2 GB
-- **Disk Space**: 500 MB
-- **Python**: 3.8 or higher
-- **Visual C++ Redistributable**: For running compiled DLL
-
-### Recommended
-- **OS**: Windows 10/11 (Latest)
-- **RAM**: 4 GB
-- **Python**: 3.10 or higher
-
----
-
-## 📦 Installation Steps
+## Installation Steps
 
 ### Step 1: Install Python
 
@@ -102,7 +58,7 @@ If you have a pre-compiled `engine.dll`, simply place it in the project folder.
 
 ---
 
-## 🚀 Running the Project
+## Running the Project
 
 ### Step 1: Prepare Project Folder
 
@@ -155,7 +111,7 @@ SmartEventManager/
 
 ---
 
-## 🎯 How to Use
+## How to Use
 
 ### Adding an Event
 
@@ -275,7 +231,7 @@ index.html
 
 ---
 
-## 📚 C Code Explanation
+## C Code Explanation
 
 ### Priority Calculation Algorithm
 
@@ -322,133 +278,3 @@ typedef struct {
     int created_day;           // Timestamp
 } Event;
 ```
-
----
-
-## 🔌 API Endpoints Reference
-
-### 1. GET `/`
-**Returns**: index.html frontend page
-
-### 2. POST `/api/events/add`
-**Request**:
-```json
-{
-    "title": "Conference 2024",
-    "category": "Conference",
-    "location": "New York Convention Center",
-    "deadline": 7,
-    "urgency": 8,
-    "importance": 9,
-    "guests": 250,
-    "budget": 5000.00
-}
-```
-**Response**: `{"success": true, "message": "Event added successfully"}`
-
-### 3. GET `/api/events/all`
-**Returns**: All events as JSON array
-```json
-{
-    "events": [
-        {
-            "id": 1,
-            "title": "Conference 2024",
-            "category": "Conference",
-            "deadline": 7,
-            "urgency": 8,
-            "importance": 9,
-            "priority_score": 345,
-            "status": 0,
-            "budget": 5000.00
-        }
-    ]
-}
-```
-
-### 4. POST `/api/events/delete`
-**Request**: `{"event_id": 1}`
-**Response**: `{"success": true, "message": "Event 1 deleted"}`
-
-### 5. GET `/api/events/schedule`
-**Returns**: Events sorted by priority score
-```json
-{
-    "schedule": [
-        {
-            "id": 1,
-            "title": "Project Submission",
-            "priority_score": 278,
-            "position": 1,
-            "deadline": 5
-        }
-    ]
-}
-```
-
-### 6. GET `/api/analytics`
-**Returns**: System statistics
-```json
-{
-    "total_events": 5,
-    "total_budget": 15000.00,
-    "total_guests": 500,
-    "completed": 2,
-    "pending": 3,
-    "avg_importance": 7.5
-}
-```
-
-### 7. POST `/api/events/status`
-**Request**: `{"event_id": 1, "status": 1}`
-**Response**: `{"success": true, "message": "Status updated to In Progress"}`
-
-### 8. GET `/api/events/search`
-**Query**: `/api/events/search?q=conference`
-**Returns**: Matching events array
-
-### 9. GET `/api/health`
-**Returns**: Server status and engine info
-
----
-
-## 🐛 Troubleshooting
-
-### Error: "No module named 'flask'"
-**Solution**:
-```bash
-pip install flask flask-cors
-```
-
-### Error: "engine.dll not found"
-**Solution**:
-1. Make sure `engine.dll` is in the same folder as `app.py`
-2. Check if it's actually compiled correctly
-3. Try recompiling with Visual Studio or MinGW
-
-### Port 5000 already in use
-**Solution**:
-```bash
-# Edit app.py, change last line:
-# app.run(debug=True, host='127.0.0.1', port=5001)  # Use 5001 instead
-```
-
-### "Failed to load engine.dll" on startup
-**Possible Causes**:
-1. Missing Visual C++ Redistributable
-2. engine.dll is 32-bit but Python is 64-bit (or vice versa)
-3. engine.dll is corrupted
-
-**Solution**:
-- Install Visual C++ Redistributable from: https://visualstudio.microsoft.com/visual-cpp-build-tools/
-- Recompile engine.dll to match Python bitness
-- Verify Python: `python -c "import struct; print(struct.calcsize('P') * 8)"`
-
-### Events not appearing in dashboard
-1. Check browser console (F12 → Console) for errors
-2. Check Flask server output for errors
-3. Try refreshing the page (Ctrl+F5)
-4. Check if server is running: http://localhost:5000/api/health
-
-
-**Built with ❤️ for your college project presentation**
