@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Smart Event Manager - Professional Event Planning</title>
     <style>
-        /* ==================== CSS VARIABLES & THEME ==================== */
+      
         :root {
             --primary: #0f172a;
             --secondary: #1e293b;
@@ -26,7 +26,6 @@
             --card-gradient: linear-gradient(135deg, #1e293b 0%, #1a202f 100%);
         }
 
-        /* ==================== GLOBAL STYLES ==================== */
         * {
             margin: 0;
             padding: 0;
@@ -45,7 +44,7 @@
             overflow-x: hidden;
         }
 
-        /* ==================== NAVBAR ==================== */
+       
         nav {
             background: rgba(15, 23, 42, 0.95);
             backdrop-filter: blur(10px);
@@ -78,7 +77,7 @@
         }
 
         .logo::before {
-            content: "⚡";
+            content: "";
             font-size: 1.8rem;
         }
 
@@ -200,7 +199,7 @@
             flex-wrap: wrap;
         }
 
-        /* ==================== BUTTONS ==================== */
+    
         .btn {
             padding: 0.8rem 2rem;
             border: none;
@@ -261,7 +260,7 @@
             background: #059669;
         }
 
-        /* ==================== CONTAINER & LAYOUT ==================== */
+        
         .container {
             max-width: 1400px;
             margin: 0 auto;
@@ -288,7 +287,7 @@
             margin-bottom: 3rem;
         }
 
-        /* ==================== DASHBOARD CARDS ==================== */
+        
         .stats-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
@@ -353,7 +352,7 @@
             opacity: 0.1;
         }
 
-        /* ==================== FORM STYLES ==================== */
+        
         .form-group {
             margin-bottom: 1.5rem;
         }
@@ -483,7 +482,6 @@
             color: var(--accent);
         }
 
-        /* ==================== TABLE STYLES ==================== */
         .table-wrapper {
             overflow-x: auto;
             margin-bottom: 2rem;
@@ -557,7 +555,7 @@
             background-clip: text;
         }
 
-        /* ==================== NOTIFICATION ==================== */
+       
         .notification {
             position: fixed;
             top: 2rem;
@@ -605,7 +603,7 @@
             color: #60a5fa;
         }
 
-        /* ==================== SEARCH BAR ==================== */
+    
         .search-container {
             position: relative;
             margin-bottom: 2rem;
@@ -634,7 +632,7 @@
             pointer-events: none;
         }
 
-        /* ==================== RESPONSIVE ==================== */
+      
         @media (max-width: 768px) {
             .hero h1 {
                 font-size: 2.5rem;
@@ -688,7 +686,7 @@
             }
         }
 
-        /* ==================== SCROLLBAR ==================== */
+
         ::-webkit-scrollbar {
             width: 10px;
             height: 10px;
@@ -707,7 +705,6 @@
             background: var(--border);
         }
 
-        /* ==================== UTILITY CLASSES ==================== */
         .hidden {
             display: none;
         }
@@ -744,8 +741,7 @@
     </style>
 </head>
 <body>
-    <!-- ==================== NAVBAR ==================== -->
-    <nav>
+   
         <div class="navbar-container">
             <div class="logo">Smart Event Manager</div>
             <ul>
@@ -757,14 +753,13 @@
         </div>
     </nav>
 
-    <!-- ==================== HERO SECTION ==================== -->
     <section class="hero">
         <div class="hero-content">
             <h1>Smart Event Management</h1>
             <p>Plan, schedule, and manage your events with AI-powered intelligence. Professional-grade event planning made simple.</p>
             <div class="hero-buttons">
                 <button class="btn btn-primary" onclick="scrollTo('dashboard')">
-                    📊 View Dashboard
+                    View Dashboard
                 </button>
                 <button class="btn btn-secondary" onclick="scrollTo('add-event')">
                     ➕ Create Event
@@ -777,36 +772,36 @@
     <div class="container">
         <!-- ANALYTICS SECTION -->
         <section class="section" id="analytics">
-            <h2 class="section-title">📈 Analytics Dashboard</h2>
+            <h2 class="section-title"> Analytics Dashboard</h2>
             <p class="section-subtitle">Real-time statistics and insights about your events</p>
             
             <div class="stats-grid" id="statsGrid">
                 <div class="stat-card">
                     <div class="stat-label">Total Events</div>
                     <div class="stat-value" id="totalEvents">0</div>
-                    <div class="stat-icon">📅</div>
+                    <div class="stat-icon"></div>
                 </div>
                 <div class="stat-card">
                     <div class="stat-label">Total Budget</div>
                     <div class="stat-value" id="totalBudget">$0</div>
-                    <div class="stat-icon">💰</div>
+                    <div class="stat-icon"></div>
                 </div>
                 <div class="stat-card">
                     <div class="stat-label">Total Guests</div>
                     <div class="stat-value" id="totalGuests">0</div>
-                    <div class="stat-icon">👥</div>
+                    <div class="stat-icon"></div>
                 </div>
                 <div class="stat-card">
                     <div class="stat-label">Avg Importance</div>
                     <div class="stat-value" id="avgImportance">0</div>
-                    <div class="stat-icon">⭐</div>
+                    <div class="stat-icon"></div>
                 </div>
             </div>
         </section>
 
         <!-- ADD EVENT SECTION -->
         <section class="section" id="add-event">
-            <h2 class="section-title">➕ Create New Event</h2>
+            <h2 class="section-title">Create New Event</h2>
             <p class="section-subtitle">Add a new event to your schedule</p>
             
             <form id="eventForm" style="max-width: 600px;">
@@ -863,18 +858,18 @@
                 </div>
 
                 <button type="submit" class="btn btn-primary" style="width: 100%; justify-content: center;">
-                    ✨ Create Event
+                    Create Event
                 </button>
             </form>
         </section>
 
         <!-- EVENTS DASHBOARD -->
         <section class="section" id="dashboard">
-            <h2 class="section-title">📋 Events Dashboard</h2>
+            <h2 class="section-title">Events Dashboard</h2>
             <p class="section-subtitle">Manage all your events in one place</p>
             
             <div class="search-container">
-                <span class="search-icon">🔍</span>
+                <span class="search-icon"></span>
                 <input type="text" id="searchInput" class="search-input" placeholder="Search events by title or category...">
             </div>
 
@@ -894,7 +889,7 @@
                     <tbody id="eventsTableBody">
                         <tr>
                             <td colspan="7" class="no-data">
-                                <div class="no-data-icon">📭</div>
+                                <div class="no-data-icon"></div>
                                 <p>No events yet. Create your first event above!</p>
                             </td>
                         </tr>
@@ -905,11 +900,11 @@
 
         <!-- SMART SCHEDULE SECTION -->
         <section class="section" id="schedule">
-            <h2 class="section-title">⚡ Smart Schedule</h2>
+            <h2 class="section-title"> Smart Schedule</h2>
             <p class="section-subtitle">Optimal event sequence based on deadline, urgency, and importance</p>
             
             <button class="btn btn-primary margin-top" onclick="generateSchedule()">
-                🎯 Generate Schedule
+                 Generate Schedule
             </button>
 
             <div class="table-wrapper margin-top">
@@ -1103,9 +1098,9 @@
                         <td>${formatCurrency(event.budget)}</td>
                         <td>
                             <button class="btn btn-small btn-secondary" onclick="updateStatus(${event.id}, ${(event.status + 1) % 3})">
-                                ${event.status === 0 ? '▶️ Start' : event.status === 1 ? '✅ Done' : '⏳ Reset'}
+                                ${event.status === 0 ? ' Start' : event.status === 1 ? ' Done' : ' Reset'}
                             </button>
-                            <button class="btn btn-small btn-danger" onclick="deleteEvent(${event.id})">🗑️ Delete</button>
+                            <button class="btn btn-small btn-danger" onclick="deleteEvent(${event.id})"> Delete</button>
                         </td>
                     </tr>
                 `).join('');
