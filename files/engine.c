@@ -9,60 +9,50 @@
 #define MAX_CATEGORY 30
 #define MAX_LOCATION 100
 
-// ==================== DATA STRUCTURES ====================
-// Represents a single event/task in the system
 typedef struct {
-    int id;                    // Unique identifier for the event
-    char title[MAX_TITLE];     // Event name/title
-    char category[MAX_CATEGORY]; // Category: Conference, Meeting, Party, Deadline
-    char location[MAX_LOCATION]; // Location of the event
-    int deadline;              // Deadline in days from now (1-365)
-    int urgency;               // Urgency level (1-10, where 10 is most urgent)
-    int importance;            // Importance level (1-10, where 10 is most important)
-    int guests;                // Expected number of guests
-    float budget;              // Budget allocated for the event
-    int priority_score;        // Calculated priority score for sorting
-    int status;                // 0: Pending, 1: In Progress, 2: Completed
-    int created_day;           // Day created (for analytics)
+    int id;                   
+    char title[MAX_TITLE];    
+    char category[MAX_CATEGORY]; 
+    char location[MAX_LOCATION]; 
+    int deadline;
+    int urgency;              
+    int importance;            
+    int guests;
+    float budget;            
+    int priority_score;        
+    int status;              
+    int created_day;
 } Event;
 
 // Global event storage
 Event events[MAX_EVENTS];
 int event_count = 0;
 
-// ==================== PRIORITY CALCULATION ====================
-// Smart scheduling algorithm: Calculate priority score
-// Score = (Deadline Weight) + (Urgency Factor) + (Importance Factor)
-// This helps in optimal scheduling
 int calculate_priority_score(int deadline, int urgency, int importance) {
-    // If deadline is very close (1-3 days), multiply urgency
-    int deadline_weight = 100 - (deadline * 10);  // Lower deadline = higher score
+  
+    int deadline_weight = 100 - (deadline * 10); 
     if (deadline <= 3) {
-        deadline_weight *= 2;  // Double priority for urgent deadlines
+        deadline_weight *= 2; s
     }
     
-    // Urgency weight (directly proportional)
-    int urgency_weight = urgency * 15;
-    
-    // Importance weight (directly proportional)
+  
+    int urgency_weight = urgency * 15;    
     int importance_weight = importance * 12;
-    
-    // Combined score
+
     int final_score = deadline_weight + urgency_weight + importance_weight;
     
-    // Ensure positive score
+
     return (final_score > 0) ? final_score : 10;
 }
 
-// ==================== ADD EVENT ====================
-// Add a new event to the system with all details
+
 int add_event(char title[], char category[], char location[], 
               int deadline, int urgency, int importance, 
               int guests, float budget) {
     
-    // Validate inputs
+ 
     if (event_count >= MAX_EVENTS) {
-        return 0;  // System full
+        return 0;
     }
     
     if (deadline < 1 || deadline > 365) {
@@ -73,7 +63,7 @@ int add_event(char title[], char category[], char location[],
         return 0;  // Invalid urgency or importance
     }
     
-    // Assign event properties
+
     events[event_count].id = event_count + 1;
     strncpy(events[event_count].title, title, MAX_TITLE - 1);
     events[event_count].title[MAX_TITLE - 1] = '\0';
@@ -101,8 +91,7 @@ int add_event(char title[], char category[], char location[],
     return 1;  // Success
 }
 
-// ==================== DELETE EVENT ====================
-// Remove an event from the system by ID
+
 int delete_event(int event_id) {
     // Find event by ID
     int index = -1;
@@ -127,9 +116,7 @@ int delete_event(int event_id) {
     return 1;  // Success
 }
 
-// ==================== SORTING ALGORITHM ====================
-// Sort events by priority score (highest first)
-// Uses bubble sort for simplicity and O(n²) is acceptable for MAX_EVENTS=100
+
 void sort_by_priority() {
     // Bubble sort: compare adjacent events and swap if needed
     for (int i = 0; i < event_count; i++) {
@@ -144,7 +131,6 @@ void sort_by_priority() {
     }
 }
 
-// Sort events by deadline (nearest first)
 void sort_by_deadline() {
     for (int i = 0; i < event_count; i++) {
         for (int j = 0; j < event_count - i - 1; j++) {
@@ -157,8 +143,7 @@ void sort_by_deadline() {
     }
 }
 
-// ==================== GET ALL EVENTS ====================
-// Return all events as JSON string
+
 void get_all_events(char *result, int max_len) {
     char buffer[8000] = "{\"events\":[";
     
@@ -183,7 +168,7 @@ void get_all_events(char *result, int max_len) {
         
         strcat(buffer, event_json);
         
-        // Add comma between events (not after last one)
+       
         if (i < event_count - 1) {
             strcat(buffer, ",");
         }
@@ -194,10 +179,7 @@ void get_all_events(char *result, int max_len) {
     result[max_len - 1] = '\0';
 }
 
-// ==================== GENERATE SMART SCHEDULE ====================
-// Generate optimal schedule by sorting by priority and deadline
 void generate_schedule(char *result, int max_len) {
-    // Create a copy of events for sorting (don't modify original)
     Event temp_events[MAX_EVENTS];
     for (int i = 0; i < event_count; i++) {
         temp_events[i] = events[i];
@@ -213,8 +195,7 @@ void generate_schedule(char *result, int max_len) {
             }
         }
     }
-    
-    // Build JSON schedule
+
     char buffer[8000] = "{\"schedule\":[";
     
     for (int i = 0; i < event_count; i++) {
@@ -247,8 +228,7 @@ void generate_schedule(char *result, int max_len) {
     result[max_len - 1] = '\0';
 }
 
-// ==================== ANALYTICS ====================
-// Calculate total budget, guest count, and statistics
+
 void get_analytics(char *result, int max_len) {
     float total_budget = 0;
     int total_guests = 0;
@@ -275,8 +255,7 @@ void get_analytics(char *result, int max_len) {
     );
 }
 
-// ==================== UPDATE EVENT STATUS ====================
-// Mark event as completed, in progress, or pending
+
 int update_event_status(int event_id, int new_status) {
     // Find event
     for (int i = 0; i < event_count; i++) {
@@ -292,8 +271,7 @@ int update_event_status(int event_id, int new_status) {
     return 0;  // Event not found
 }
 
-// ==================== SEARCH EVENTS ====================
-// Search events by title or category
+
 void search_events(char *query, char *result, int max_len) {
     char buffer[8000] = "{\"results\":[";
     int found = 0;
